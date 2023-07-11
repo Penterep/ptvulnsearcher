@@ -1,26 +1,17 @@
 #!/usr/bin/python3
 __version__ = "0.0.2"
-from ptlibs import ptjsonlib, ptmisclib, ptprinthelper
+from ptlibs import ptjsonlib, ptprinthelper
 import argparse
 import sys
 import requests
 import json
 import logging
-from dotenv import load_dotenv
-from pathlib import Path  
-import os
 
-
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
-IP_ADDRESS = os.getenv("IP")
-PORT = os.getenv("PORT")
-
-BASE_URL = "http://%s:%s/api/v1/" % (IP_ADDRESS, PORT)
+BASE_URL = "https://cve.penterep.com/api/v1/"
 
 class ptvulnsearcher:
     def __init__(self, args):
-        logging.disable(logging.CRITICAL) #Disabling all logging =< CRITICAL
+        logging.disable(logging.CRITICAL)
         self.ptjsonlib = ptjsonlib.PtJsonLib(args.json)
         self.json_no = self.ptjsonlib.get_result_json()
         self.use_json = args.json
@@ -111,9 +102,8 @@ def get_help():
         }]
 
 def search_cve(search_string, search_cve):
-    api_url = "https://as.penterep.com:8443/api/v1/cve/search"
     parameters = {"search": search_string, "cve": search_cve}
-    response = requests.get(api_url, params=parameters)
+    response = requests.get(BASE_URL, params=parameters)
     response_json = response.json()
     return json.dumps(response_json['data'], indent=2)
 
