@@ -1,26 +1,27 @@
 #!/usr/bin/python3
-__version__ = "0.0.2"
-from ptlibs import ptjsonlib, ptprinthelper
-import argparse
-import sys
+import sys; sys.path.append(__file__.rsplit("/", 1)[0])
 import requests
 import json
 import logging
+import argparse
+
+from _version import __version__
+from ptlibs import ptjsonlib, ptprinthelper
+
 
 BASE_URL = "https://cve.penterep.com/api/v1/"
 
 class ptvulnsearcher:
     def __init__(self, args):
         logging.disable(logging.CRITICAL)
-        self.ptjsonlib = ptjsonlib.PtJsonLib(args.json)
-        self.json_no = self.ptjsonlib.get_result_json()
+        self.ptjsonlib = ptjsonlib.PtJsonLib()
         self.use_json = args.json
         self.args = args
 
     def load_json_data(self,vulns):
-        vulns = json.loads(vulns) 
-        ptprinthelper.ptprint(ptprinthelper.out_ifnot(
-            f"Found {len(vulns)} CVE Records", "INFO", self.use_json))
+        vulns = json.loads(vulns)
+        ptprinthelper.ptprint(
+            ptprinthelper.out_ifnot(f"Found {len(vulns)} CVE Records", "INFO", self.use_json))
         for vuln in vulns:
             cveid = vuln["cve_id"]
             cwe = vuln["cwe_id"]
@@ -53,7 +54,7 @@ class ptvulnsearcher:
                 ptprinthelper.out_ifnot(f'{ptprinthelper.get_colored_text("Version: ", color="TITLE")} {version}', "", self.use_json))
         ptprinthelper.ptprint(ptprinthelper.out_if(self.ptjsonlib.get_result_json(), "", self.use_json))
         sys.exit(0)
-                  
+
     def run(self):
         if self.args.cve:
             url = BASE_URL+"cve/%s" % self.args.cve
@@ -78,9 +79,9 @@ class ptvulnsearcher:
             return
         if self.args.json:
             print(vulns)
-        else: 
+        else:
             print(self.load_json_data(vulns))
-    
+
 def get_help():
     return [
         {"description": ["ptvulnsearcher"]},
