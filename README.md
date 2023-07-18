@@ -1,4 +1,4 @@
-![penterepTools](https://www.penterep.com/external/penterepToolsLogo.png)
+[![penterepTools](https://www.penterep.com/external/penterepToolsLogo.png)](https://www.penterep.com/)
 
 
 # PTVULNSEARCHER
@@ -14,19 +14,27 @@ pip install ptvulnsearcher
 
 ### Add to PATH
 If you cannot invoke the script in your terminal, its probably because its not in your PATH. Fix it by running commands below.
+
+> Add to PATH for Bash
 ```bash
 echo "export PATH=\"`python3 -m site --user-base`/bin:\$PATH\"" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+> Add to PATH for ZSH
+```bash
+echo "export PATH=\"`python3 -m site --user-base`/bin:\$PATH\"" >> ~/.zshhrc
+source ~/.zshhrc
+```
+
 ## Usage examples
 
-```         
-ptvulnsearcher -cve CVE-2022-29885           
+```
+ptvulnsearcher -cve CVE-2022-29885            
 ptvulnsearcher -vn Redhat                     
 ptvulnsearcher -pn linux                      
 ptvulnsearcher -vn Redhat -pn linux           
-ptvulnsearcher -vn Redhat -pn linux -pv 9.0  
+ptvulnsearcher -vn Redhat -pn linux -pv 9.0   
 ptvulnsearcher -pn linux -pv 9.0              
 ```
 
@@ -42,34 +50,28 @@ ptvulnsearcher -pn linux -pv 9.0
 ```
 
 ## Dependencies
-- requests
-- ptlibs
-
-We use [ExifTool](https://exiftool.org/) to extract metadata.
-Python 3.6+ is required.
+```
+requests
+ptlibs
+```
 
 ## Version History
-* 0.0.1
-    * Alpha releases
-* 0.0.2
-    * New options
-    
+```
+0.0.2
+    - New options
+0.0.1
+    - Alpha releases
+```
 ## License
 
-Copyright (c) 2022 HACKER Consulting s.r.o.
+Copyright (c) 2023 Penterep Security s.r.o.
 
-ptinsearcher is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ptvulnsearcher is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-ptinsearcher is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+ptvulnsearcher is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with ptinsearcher.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with ptvulnsearcher. If not, see https://www.gnu.org/licenses/.
+
 
 ## Warning
 
